@@ -8,17 +8,53 @@
  */
 
 // Apply the java plugin to add support for Java
-apply plugin: 'java'
-
-// In this section you declare where to find the dependencies of your project
-repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+buildscript {
+  repositories {
+        jcenter()
+   }
+}
+plugins {
+    id "com.jfrog.bintray" version "1.6"
 }
 
+group = 'de.fasibio.threaddistributor'
+version = '1.0'
+
+allprojects {
+	repositories {
+		jcenter()
+	}
+	apply plugin: 'maven'
+	apply plugin: 'maven-publish'
+	apply plugin: 'java'
+}
+
+publishing {
+	publications {
+		MyPublication(MavenPublication) {
+			from components.java
+			groupId 'de.fasibio.threaddistributor'
+            		artifactId 'threaddistributor'
+            		version '1.0'
+		}
+	}
+}
+
+bintray {
+    user =  property('user')
+    key =  property('key')
+    publications = ['MyPublication']
+      pkg {
+        repo = 'maven'
+        name = 'threaddistributor'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/bintray/gradle-bintray-plugin.git'
+    }
+}
 // In this section you declare the dependencies for your production and test code
 dependencies {
+
+
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.12'
   	testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.12'
@@ -27,4 +63,8 @@ dependencies {
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.6'
 }
