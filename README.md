@@ -15,7 +15,7 @@ to your dependencies
 Build it to get the Sources... 
 
 
-At https://github.com/fasibio/ThreadDistributor/tree/master/bin/de/fasibio/threaddistributor/example you find an example. 
+At https://github.com/fasibio/ThreadDistributor/tree/master/src/test/java/de/fasibio/threaddistributor/example you find an example. 
 
 
 IMPORTENT: 
