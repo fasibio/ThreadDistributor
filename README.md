@@ -48,7 +48,7 @@ EasyDistributor distributor = new EasyDistributor(-1,0); //parameter: maxWorkerN
 Task oneTask = new Task();
 oneTask.setObject(new MyThreadspecificClass() );
 
-distributor.addTask(oneTask)
+distributor.addTask(oneTask);
 ```
 
 If you call distributor.addTask(oneTask) the distributor will look for a free Thread and execute this task in a new threads. 
@@ -74,3 +74,7 @@ At https://github.com/fasibio/ThreadDistributor/tree/master/src/test/java/de/fas
 
 IMPORTENT: 
 By closing the Programm you have to call Distributor#killAllThreads
+
+```java
+distributor.killAllThreads();
+```
