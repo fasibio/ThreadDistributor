@@ -28,7 +28,7 @@ dependencies {
 
 
 You need to declare the threadspecific class. 
-The execute methode will execute in an own thread. 
+The methode execute will run in an own thread. 
 ```java
 public class MyThreadspecificClass implements ExecuteAble{
     
