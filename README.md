@@ -24,7 +24,7 @@ dependencies {
 }
 ```
 
-##How to Start
+##How to Start (simple)
 
 
 You need to declare the threadspecific class
@@ -50,8 +50,8 @@ oneTask.setObject(new myThreadspecificClass() );
 distributor.addTask(oneTask)
 ```
 
-If you call distributor.addTask(oneTask) the Framework will look for free Thread and execute this Task in a new threads. 
-If maxWorkerNumber not -1 and all Worker are full it will come in the waitlist and will be execute if an other task is finished. 
+If you call distributor.addTask(oneTask) the distributor will look for a free Thread and execute this task in a new threads. 
+If maxWorkerNumber not -1 and all worker are in prozess, the task will come in the waitlist and will be execute if an other task is finished. 
 
 
 
@@ -66,7 +66,9 @@ public class MyTaskListener implements TaskListener{
 ```
 
 You have to add the Listener to the Task before you add the task to the distributor. 
-
+```java
+onesheep.addTaskListener(new MyTaskListener());
+```
 At https://github.com/fasibio/ThreadDistributor/tree/master/src/test/java/de/fasibio/threaddistributor/example you find an example. 
 
 IMPORTENT: 
