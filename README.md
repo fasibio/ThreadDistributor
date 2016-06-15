@@ -63,10 +63,9 @@ public class MyTaskListener implements TaskListener{
     //get information about the task 
     }
 }
-
 ```
-
 You have to add the Listener to the Task before you add the task to the distributor. 
+
 ```java
 onesheep.addTaskListener(new MyTaskListener());
 ```
