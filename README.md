@@ -27,7 +27,8 @@ dependencies {
 ##How to Start (simple)
 
 
-You need to declare the threadspecific class
+You need to declare the threadspecific class. 
+The execute methode will execute in an own thread. 
 ```java
 public class MyThreadspecificClass implements ExecuteAble{
     
@@ -45,7 +46,7 @@ You can Add Task to this distributor...
 ```java
 EasyDistributor distributor = new EasyDistributor(-1,0); //parameter: maxWorkerNumber, startWorkerNumber
 Task oneTask = new Task();
-oneTask.setObject(new myThreadspecificClass() );
+oneTask.setObject(new MyThreadspecificClass() );
 
 distributor.addTask(oneTask)
 ```
