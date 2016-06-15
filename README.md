@@ -29,7 +29,7 @@ dependencies {
 
 You need to declare the threadspecific class
 ```java
-public class myThreadspecificClass implements ExecuteAble{
+public class MyThreadspecificClass implements ExecuteAble{
     
     public void execute(Worker sender) {
 		//What´s to do in the new Thread 
