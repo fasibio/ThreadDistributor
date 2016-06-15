@@ -72,7 +72,7 @@ public class MyTaskListener implements TaskListener{
 You have to add the Listener to the Task before you add the task to the distributor. 
 
 ```java
-onesheep.addTaskListener(new MyTaskListener());
+oneTask.addTaskListener(new MyTaskListener());
 ```
 At https://github.com/fasibio/ThreadDistributor/tree/master/src/test/java/de/fasibio/threaddistributor/example you find an example. 
 
