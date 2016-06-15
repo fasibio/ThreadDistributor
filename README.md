@@ -38,11 +38,13 @@ public class MyThreadspecificClass implements ExecuteAble{
 }
 ```
 At next you need an Distributor
+
 ```java
 EasyDistributor distributor = new EasyDistributor(-1,0); //parameter: maxWorkerNumber, startWorkerNumber
 ```
 
 You can Add Task to this distributor... 
+
 ```java
 EasyDistributor distributor = new EasyDistributor(-1,0); //parameter: maxWorkerNumber, startWorkerNumber
 Task oneTask = new Task();
@@ -57,7 +59,9 @@ If maxWorkerNumber not -1 and all worker are in prozess, the task will come in t
 
 
 Now it´s a good idea to declare a TaskListener (optional)
+
 ```java
+
 public class MyTaskListener implements TaskListener{
     public void updateStatus(Status status, Task task) {
     //get information about the task 
