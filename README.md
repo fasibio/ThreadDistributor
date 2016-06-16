@@ -1,10 +1,12 @@
 # ThreadDistributor
 Java Thread Distributor﻿ 
 
-If you have a list of tasks you can use this framework to distribut it to different Threads. ﻿ ﻿ ﻿ Please tell in which Software you are use this Lib
+If you have a list of tasks you can use this framework to distribut it to different Threads. 
+
+Please tell us in which Software you useing this lib.
 
 
-## How to use: 
+## How to use
 
 You find the Source at bintray.com (javacenter)
 
@@ -40,13 +42,13 @@ public class MyThreadspecificClass implements ExecuteAble {
 	}
 }
 ```
-At next you need an Distributor
+At next you need an distributor
 
 ```java
 EasyDistributor distributor = new EasyDistributor(-1,0); //parameter: maxWorkerNumber, startWorkerNumber
 ```
 
-You can Add Task to this distributor... 
+You can add task to this distributor... 
 
 ```java
 EasyDistributor distributor = new EasyDistributor(-1,0); //parameter: maxWorkerNumber, startWorkerNumber
@@ -56,12 +58,10 @@ oneTask.setObject(new MyThreadspecificClass() );
 distributor.addTask(oneTask);
 ```
 
-If you call distributor.addTask(oneTask) the distributor will look for a free Thread and execute this task in a new threads. 
-If maxWorkerNumber not -1 and all worker are in prozess, the task will come in the waitlist and will be execute if an other task is finished. 
+If you call `distributor.addTask(oneTask)` the distributor will look for a free Thread and execute this task in a new thread. 
+If maxWorkerNumber is not -1 and all worker are in process, the task will come in the waitlist and will be execute after an other task is finished. 
 
-
-
-Now it´s a good idea to declare a TaskListener (optional)
+Now it´s a good idea to declare a `TaskListener` (optional)
 
 ```java
 
@@ -71,7 +71,7 @@ public class MyTaskListener implements TaskListener{
     }
 }
 ```
-You have to add the Listener to the Task before you add the task to the distributor. 
+You have to add the listener to the task before you add the task to the distributor. 
 
 ```java
 oneTask.addTaskListener(new MyTaskListener());
@@ -79,7 +79,7 @@ oneTask.addTaskListener(new MyTaskListener());
 At https://github.com/fasibio/ThreadDistributor/tree/master/src/test/java/de/fasibio/threaddistributor/example you find an example. 
 
 IMPORTENT: 
-By closing the Programm you have to call Distributor#killAllThreads
+By closing the program you have to call Distributor#killAllThreads
 
 ```java
 distributor.killAllThreads();
