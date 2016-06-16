@@ -1,5 +1,7 @@
 # ThreadDistributor
-Java Thread Distributor ﻿If you have a list of tasks you can use this framework to distribut it to different Threads. ﻿ ﻿ ﻿ Please tell in which Software you are use this Lib
+Java Thread Distributor﻿ 
+
+If you have a list of tasks you can use this framework to distribut it to different Threads. ﻿ ﻿ ﻿ Please tell in which Software you are use this Lib
 
 
 ## How to use: 
