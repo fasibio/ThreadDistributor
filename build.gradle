@@ -41,8 +41,11 @@ publishing {
 }
 
 bintray {
-    user =  property('user')
-    key =  property('key')
+	if (project.hasProperty("user")){
+	    user =  property('user')
+	    key =  property('key')
+	
+	}
     publications = ['MyPublication']
       pkg {
         repo = 'maven'
