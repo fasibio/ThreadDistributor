@@ -84,3 +84,4 @@ By closing the program you have to call Distributor#killAllThreads
 ```java
 distributor.killAllThreads();
 ```
+![alt tag](https://github.com/fasibio/ThreadDistributor/blob/master/dokumentation/threaddistributor.png)
