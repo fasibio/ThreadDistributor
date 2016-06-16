@@ -17,8 +17,7 @@ private static final Logger log = LoggerFactory.getLogger(Starter.class);
 	 */
 	public static void main(String[] args) {
 		
-		
-		EasyPriorityDistributor distributor = new EasyPriorityDistributor(-1, 5);
+		EasyPriorityDistributor distributor = new EasyPriorityDistributor(20, 0);
 		SheepStall stall = new SheepStall(distributor);
 		try {
 			log.info("Warte 10s");

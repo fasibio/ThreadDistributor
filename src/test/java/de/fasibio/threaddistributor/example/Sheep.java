@@ -20,7 +20,7 @@ public class Sheep implements ExecuteAble{
 	public void walk(){
 		Random r = new Random();
 		int steps = r.nextInt(30);
-		log.info("Sheep "+name+" walk aktuelly "+steps+" steps");
+//		log.info("Sheep "+name+" walk aktuelly "+steps+" steps");
 		for (int i = 0 ; i <steps; i++){
 			step = step +1 ;
 			try {
@@ -30,7 +30,7 @@ public class Sheep implements ExecuteAble{
 			}
 		
 		}
-		log.info("Sheep "+name+" has  walked "+steps+" steps");
+//		log.info("Sheep "+name+" has  walked "+steps+" steps");
 	}
 	
 	public String toString(){

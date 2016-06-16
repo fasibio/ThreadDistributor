@@ -1,6 +1,5 @@
 package de.fasibio.threaddistributor;
 
-import javax.management.RuntimeErrorException;
 
 import de.fasibio.threaddistributor.TaskListener.Status;
 /**
@@ -27,7 +26,7 @@ public abstract class Worker extends Thread {
 		if (this.task == null){
 			this.task = task;
 		}else{
-			throw new RuntimeException("Kann not set Task to worker with have allready a Task");
+			throw new RuntimeException("Can not set Task to worker with have allready a Task");
 		}
 	}
 	/**
