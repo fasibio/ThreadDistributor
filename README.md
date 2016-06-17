@@ -23,7 +23,7 @@ Build it to get the Sources...
 ```java
 dependencies {
     ⋯
-    compile 'de.fasibio.threaddistributor:threaddistributor:1.0'
+    compile 'de.fasibio.threaddistributor:threaddistributor:1.2'
     ⋯
 }
 ```
