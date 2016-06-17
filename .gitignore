@@ -78,6 +78,8 @@ $RECYCLE.BIN/
 *.pydevproject
 .metadata
 .gradle
+.gradle/
+build/
 bin/
 tmp/
 *.tmp
