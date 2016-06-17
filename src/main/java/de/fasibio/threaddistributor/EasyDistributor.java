@@ -8,7 +8,11 @@ package de.fasibio.threaddistributor;
  *
  */
 public class EasyDistributor extends Distributor{
-
+	/**
+	 * Ini the Distributor 
+	 * @param startWorkerNumber the Value of Idle Worker It have to 0 bigger/equals startWorkerNumber have to smaller/equals maxWorkerNumber 
+	 * @param maxWorkerNumber -1 = unlimited  have to be bigger/equals startWorkerNumber
+	 */
 	public EasyDistributor(int maxWorkerNumber, int startWorkerNumber) {
 		super(maxWorkerNumber, startWorkerNumber);
 	

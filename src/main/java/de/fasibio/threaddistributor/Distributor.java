@@ -1,6 +1,7 @@
 package de.fasibio.threaddistributor;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 import de.fasibio.threaddistributor.TaskListener.Status;
@@ -17,10 +18,12 @@ public abstract class Distributor {
 	private LinkedList<Task> openTasks = new LinkedList<Task>();
 	private int startWorkerNumber = 10, maxWorkerNumber = 100;
 	private String workerMainName= "distributerworker-";
+	protected boolean rundistributor =true;
+	
 	/**
 	 * Ini the Distributor 
-	 * @param startWorkerNumber the Value of Idle Worker It have to 0 >=startWorkerNumber <= maxWorkerNumber 
-	 * @param maxWorkerNumber -1 = unlimited  have to be >= startWorkerNumber
+	 * @param startWorkerNumber the Value of Idle Worker It have to 0 bigger/equals startWorkerNumber have to smaller/equals maxWorkerNumber 
+	 * @param maxWorkerNumber -1 = unlimited  have to be bigger/equals startWorkerNumber
 	 */
 	public Distributor(int maxWorkerNumber, int startWorkerNumber){
 		if (maxWorkerNumber == -1){
@@ -51,7 +54,7 @@ public abstract class Distributor {
 	 * [NICHT Aufrufen wird von den Worker selber genutzt]
 	 * Ein Worker ruft diese Methode auf wenn er fertig mit seiner Arbeit ist. Dadruch wird der Thread vernichtet und offene Aufgaben einem neuen Worker hinzugefuegt. 
 	 * Dabei wird beachtet das die minWorker immer offen bleiben. 
-	 * @param worker
+	 * @param worker der zu entfernende Worker
 	 */
 	protected synchronized void replaceWorker(Worker worker) {
 		workerlist.remove(worker);
@@ -68,8 +71,8 @@ public abstract class Distributor {
 	}
 	
 	/**
-	 * Liefert die Anzahl {@link Task} die noch auf einen freien Thread warten zurueck
-	 * @return
+	 * 
+	 * @return Liefert die Anzahl {@link Task} die noch auf einen freien Thread warten zurueck
 	 */
 	public int getWaitListCount(){
 		return openTasks.size();
@@ -93,7 +96,7 @@ public abstract class Distributor {
 	
 	/**
 	 * Fuegt den Task dem naechten Freien Workerzu wenn es keinen freien Worker mehr gibt wird false zureuckkgegeben
-	 * @param task
+	 * @param task Der Task der verteilt werden soll
 	 * @return true wenn er hinzugefuegt wurde, false wenn kein freier Worker gefunden wurde
 	 */
 	protected boolean addTaskToNextFreeWorker(Task task){
@@ -120,22 +123,29 @@ public abstract class Distributor {
 	 * Ist MaxWorker erreicht, wird der Task in die Warteliste aufgenommen. 
 	 * Dort wartet er solange, bis er ein Worker mit seiner aktuellen Aufgabe fertig ist. 
 	 * Die Warte liste nutzt dabei das FIFO Modell.
-	 * @param task
+	 * @param task Der Task der hinzugefügt werden soll
 	 */
 	public void addTask(Task task){
+		if (!isDistributorstartet()){
+			addTaskToWaitList(task);
+			return;
+		}
 		if (!addTaskToNextFreeWorker(task)){
 			if (!hasMaxWorkerNumber()){
 				handleTask(addNewWorker(), task);
 			}else{
-				openTasks.add(task);
-				task.updateStatus(Status.inWaitList);
+				addTaskToWaitList(task);
 			}	
 		}
-		
+	}
+	
+	protected void addTaskToWaitList(Task task) {
+		openTasks.add(task);
+		task.updateStatus(Status.inWaitList);
 	}
 	/**
-	 * Liefert zurueck ob es  Worker gibt die einen Task verarbeiten (laufen).  
-	 * @return
+	 *   
+	 * @return Liefert zurueck ob es  Worker gibt die einen Task verarbeiten (laufen).
 	 */
 	public boolean hasBusyWorker(){
 		boolean busy = false;
@@ -157,8 +167,8 @@ public abstract class Distributor {
 	}
 	
 	/**
-	 * Liefert die Maximale Anzahl Worker zureuck die geöffnet werden können. 
-	 * @return
+	 *  
+	 * @return Liefert die Maximale Anzahl Worker zureuck die geöffnet werden können.
 	 */
 	public boolean hasMaxWorkerNumber(){
 		return (workerlist.size() == getMaxWorkerNumber());
@@ -178,14 +188,14 @@ public abstract class Distributor {
 	}
 	
 	/**
-	 * Return a new Inizialised of a real Worker
-	 * @return
+	 * 
+	 * @return Return a new Inizialised of a real Worker
 	 */
 	protected abstract Worker getNewWorker();
 
 	/**
-	 * Return the Value of Idle Worker 
-	 * @return
+	 * 
+	 * @return RETURN THE VALUE OF IDLE WORKER 
 	 */
 	public int getStartWorkerNumber() {
 		return startWorkerNumber;
@@ -221,6 +231,22 @@ public abstract class Distributor {
 
 	public void setWorkerMainName(String workerMainName) {
 		this.workerMainName = workerMainName;
+	}
+	
+	public void stopDistribution(){
+		rundistributor = false;
+	}
+
+	public void startDistribution(){
+		rundistributor = true;
+		List<Task> cloneTask = openTasks.subList(0, openTasks.size());
+		for (Task one : cloneTask){
+			addTask(one);
+		}
+	}
+	
+	public boolean isDistributorstartet(){
+		return rundistributor;
 	}
 	
 

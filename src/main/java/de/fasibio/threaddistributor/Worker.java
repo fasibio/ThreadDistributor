@@ -22,11 +22,15 @@ public abstract class Worker extends Thread {
 		kill = true;
 	}
 	
+	public Distributor getDistributor(){
+		return this.distributor;
+	}
+	
 	public void setTask(Task task){
 		if (this.task == null){
 			this.task = task;
 		}else{
-			throw new RuntimeException("Can not set Task to worker with have allready a Task");
+			throw new RuntimeException("Can not set Task to worker which have allready a Task");
 		}
 	}
 	/**
@@ -100,7 +104,7 @@ public abstract class Worker extends Thread {
 
 	/**
 	 * Wir aufgerufen und bestimmt das eigentliche Verarbeiten eines {@link Task}
-	 * @param obj
+	 * @param obj das auszufuehrende ExecuteObj
 	 */
 	protected abstract void runTask(ExecuteAble obj);
 

@@ -13,7 +13,7 @@ public class Task {
 	
 	/**
 	 * Fuegt einen weiteren {@link TaskListener} hinzu der bei Verarbeiten durch einen {@link Worker} status updates mitgeteilt werden
-	 * @param listener
+	 * @param listener der zu verwendende Listener
 	 */
 	public void addTaskListener(TaskListener listener){
 		this.listener.add(listener);
@@ -23,7 +23,7 @@ public class Task {
 	/**
 	 * @see Task#addTaskListener(TaskListener)
 	 * Loescht einen Tasklistener
-	 * @param listener
+	 * @param listener der zu verwendende Listener
 	 */
 	public void removeTaskListener(TaskListener listener){
 		this.listener.remove(listener);
@@ -31,7 +31,7 @@ public class Task {
 	
 	/**
 	 * Wird aufgerufen um den {@link TaskListener} einen aktuellen Status mitzuteilen
-	 * @param status
+	 * 
 	 */
 	public void updateStatus(TaskListener.Status status){
 		for (TaskListener one : listener){
@@ -49,7 +49,7 @@ public class Task {
 	
 	/**
 	 * Um das Object zu setzen das im neuen Thread ausgefuehrt werden soll. 
-	 * @param object
+	 * 
 	 */
 	public void setObject(ExecuteAble object) {
 		this.object = object;

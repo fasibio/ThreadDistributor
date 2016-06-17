@@ -18,7 +18,7 @@ plugins {
 }
 
 group = 'de.fasibio.threaddistributor'
-version = '1.0'
+version = '1.2'
 
 allprojects {
 	repositories {
@@ -33,9 +33,11 @@ publishing {
 	publications {
 		MyPublication(MavenPublication) {
 			from components.java
+			artifact sourcesJar
+            artifact javadocJar
 			groupId 'de.fasibio.threaddistributor'
             		artifactId 'threaddistributor'
-            		version '1.0'
+            		version '1.2'
 		}
 	}
 }
@@ -54,6 +56,17 @@ bintray {
         vcsUrl = 'https://github.com/bintray/gradle-bintray-plugin.git'
     }
 }
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
 // In this section you declare the dependencies for your production and test code
 dependencies {
 

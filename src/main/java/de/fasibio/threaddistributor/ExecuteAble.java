@@ -9,7 +9,7 @@ public interface ExecuteAble {
 	
 	/**
 	 * WAs im neuen Thread ausgefuehrt werden soll. 
-	 * @param sender
+	 * @param sender der worker der den task ausfuehrt
 	 */
 	public void execute(Worker sender);
 }
